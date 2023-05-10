@@ -9,6 +9,15 @@ const updatePaginationDiv = (currentPage, numPages) => {
   var startPage = Math.max(1, currentPage-Math.floor(numPageBtn/2));
   var endPage = Math.min(numPages, currentPage+Math.floor(numPageBtn/2));
 
+  if (currentPage > 1) {
+    $('#pagination').append(`
+        <button class="btn btn-primary page ml-1 numberedButtons" id="pagefirst" value="1">First</button>
+    `);
+    $('#pagination').append(`
+        <button class="btn btn-primary page ml-1 numberedButtons" id="pageprev" value="${currentPage-1}">Prev</button>
+    `);
+  }
+
   if (currentPage < 3) {
     startPage = 1;
     endPage = 5;
@@ -25,6 +34,15 @@ const updatePaginationDiv = (currentPage, numPages) => {
     $('#pagination').append(`
     <button class="btn btn-primary page ${active} ml-1 numberedButtons" value="${i}">${i}</button>
     `)
+  }
+
+  if (currentPage < numPages) {
+    $('#pagination').append(`
+        <button class="btn btn-primary page ml-1 numberedButtons" id="pagenext" value="${currentPage+1}">Next</button>
+    `);
+    $('#pagination').append(`
+        <button class="btn btn-primary page ml-1 numberedButtons" id="pagelast" value="${numPages}">Last</button>
+    `);
   }
 }
 
